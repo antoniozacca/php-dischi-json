@@ -1,17 +1,18 @@
 const { createApp } = Vue;
+
 createApp({
-    data(){
-        return{
-            urlTodos: 'http://localhost/php-dischi-json/server.php'
-        }
-    },
-    methods: {
-        
-        getTodos(){
-            axios.get(this.urlTodos).then((response) => console.log(response))
-        },
-    },
-    created(){
-        this.getTodos()
+  data() {
+    return {
+      urlTodos: 'http://localhost/php-dischi-json/server.php',
+      todos: [] 
+    };
+  },
+  methods: {
+    getTodos() {
+      axios.get(this.urlTodos).then((response) => {this.todos = response.data})
     }
-}).mount('#app')
+  },
+  created() {
+    this.getTodos();
+  }
+}).mount('#app');
